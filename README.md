@@ -41,8 +41,19 @@ C++ Redis 사용 방법 정리
     - Support scan in an unsafe way.
        
   
+### r3c
+- r3c 디렉토리에 Windows 지원으로 포팅했음.
+    - 이후 원본에서 변경이 있는 경우 직접 업데이트 해야 한다.
+- 원본 https://github.com/eyjian/r3c
+- C++11 지원 필요
+- Redis 5.0 기능까지 지원
+- hiredis 필요.
+- .h/.cpp 두 개의 파일로 구성.
+- 문서가 중국어로 되어 있음.
+    
+
 ### cpp_redis
-- https://github.com/cylix/cpp_redis
+- https://github.com/cpp-redis/cpp_redis
 - C++11 필요.
 - Linux, Windows 지원.
 - pipeline, pub/sub 지원.
@@ -55,6 +66,7 @@ C++ Redis 사용 방법 정리
 - Linux, Windows 지원.
 - 바로는 사용 못하고 좀 작업을 해야함.
 - hiredis 필요.
+- support redis cluster
 - support Redis master slave connection, Support read/write separation
 - connection pool
 - multi thread safety
@@ -93,22 +105,4 @@ C++ Redis 사용 방법 정리
 - Linux, Windows 지원
 
 
-## Linux만 지원하는 Redis 라이브러리  
-### redox
-- https://github.com/hmartiro/redox
-- C++11 지원 필요.
-- linux만 지원.
-- hiredis and libev 필요.
-- Modern, asynchronous, and wicked fast C++11 client for Redis
-- Thread-safe - use one client in multiple threads or multiple clients in one
   
-  
-## r3c
-- https://github.com/eyjian/r3c
-- Windows 비 지원.
-- C++11 지원 필요
-- Redis 5.0 기능까지 지원
-- hiredis 필요.
-- .h/.cpp 두 개의 파일로 구성.
-- 문서가 중국어로 되어 있음.
-- Windows로 포팅하기 어렵지 않은듯
