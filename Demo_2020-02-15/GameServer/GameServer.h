@@ -10,13 +10,12 @@
 #include <thread>
 #include <mutex>
 
-//TODO redis 연동. hiredis 포함하기
 
-class ChatServer : public IOCPServer
+class GameServer : public IOCPServer
 {
 public:
-	ChatServer() = default;
-	virtual ~ChatServer() = default;
+	GameServer() = default;
+	virtual ~GameServer() = default;
 	
 
 	virtual void OnConnect(const UINT32 clientIndex_) override 

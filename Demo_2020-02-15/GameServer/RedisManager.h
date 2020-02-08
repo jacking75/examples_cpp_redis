@@ -3,7 +3,7 @@
 #include "RedisTaskDefine.h"
 #include "ErrorCode.h"
 
-#include "../thirdparty/CRedisConn.h"
+#include <CRedisConn.h>
 #include <vector>
 #include <deque>
 #include <thread>
