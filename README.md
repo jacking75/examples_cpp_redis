@@ -30,6 +30,7 @@ C++ Redis 사용 방법 정리
 ### redis_client
 - redis_client 디렉토리
 - 한 쌍의 .h/.cpp 로 구성.
+- Linux, Windows 지원
 - hiredis에 의존한다. 즉 꼭 필요하다.
 - pipeline 지원.
 - cluster까지 지원.
@@ -47,6 +48,7 @@ C++ Redis 사용 방법 정리
 - 원본 https://github.com/eyjian/r3c
 - C++11 지원 필요
 - Redis 5.0 기능까지 지원
+- Linux, Windows 지원
 - hiredis 필요.
 - .h/.cpp 두 개의 파일로 구성.
 - 문서가 중국어로 되어 있음.
