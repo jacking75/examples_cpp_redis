@@ -691,6 +691,34 @@ public:
 		return ret;
 	}
 
+	bool set(const std::string& key, const std::string& value, uint32_t& retval)
+	{
+		if (!_connected || !_redCtx)
+		{
+			_errStr = _errDes[ERR_NO_CONNECT];
+			return false;
+		}
+
+		bool ret = false;
+		redisReply* reply = redisCmd("SET %s %s", key.c_str(), value.c_str());
+
+		if (_getError(reply))
+		{
+			ret = false;
+		}
+		else
+		{
+			retval = (uint32_t)reply->integer;
+			ret = true;
+		}
+
+		if (NULL != reply)
+		{
+			freeReplyObject(reply);
+		}
+
+		return ret;
+	}
 
 
 	//////////////////////////////   hash 的方法 //////////////////////////////////////
