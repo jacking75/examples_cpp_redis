@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace TetrisApiServer
+namespace APIServer
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            APIServer.Init(args);
+            LoginServer.Init(args);
 
             BuildWebHost(args).Run();
         }

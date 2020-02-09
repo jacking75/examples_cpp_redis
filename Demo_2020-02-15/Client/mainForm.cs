@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -372,6 +374,36 @@ namespace csharp_test_client
             //PostSendPacket(PACKET_ID.PACKET_ID_ROOM_RELAY_REQ, bodyData);
             //DevLog.Write($"방 릴레이 요청");
         }
-               
+
+        // 로그인서버에 로그인 요청하기
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            //https://qiita.com/rawr/items/f78a3830d894042f891b
+
+            var client = new HttpClient();
+            //client.DefaultRequestHeaders.Accept.Clear();
+            //client.DefaultRequestHeaders.Accept.Add(
+            //    new MediaTypeWithQualityHeaderValue("application/json"));
+            //client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+
+            var loginJson = new LoginReqJson { UserID = textBox2.Text, UserPW = "hhh" };
+            var json = Utf8Json.JsonSerializer.Serialize(loginJson).ToString();
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://api.github.com/orgs/dotnet/repos", content);
+            var responseStream = await response.Content.ReadAsStreamAsync();
+            var loginRes = await Utf8Json.JsonSerializer.DeserializeAsync<LoginResJson>(responseStream);
+
+            if (loginRes.Result == 1)
+            {
+                textBoxIP.Text = loginRes.GameServerIP;
+                textBoxPort.Text = loginRes.GameServerPort.ToString();
+                textBoxUserID.Text = textBox2.Text;
+                textBoxUserPW.Text = loginRes.AuthToken;
+            }
+            else
+            {
+                DevLog.Write($"LoginServer에 로그인 요청 실패 !!!");
+            }
+        }
     }
 }

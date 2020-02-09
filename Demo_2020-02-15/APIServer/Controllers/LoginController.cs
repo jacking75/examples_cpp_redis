@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TetrisApiServer.Controllers
+namespace APIServer.Controllers
 {
     [Produces("application/json")]
     [Route("api/Login")]
@@ -15,14 +15,19 @@ namespace TetrisApiServer.Controllers
         [HttpPost]
         public async Task<LoginRes> Process([FromBody] LoginReq request)
         {
-            //var tick = DateTime.Now.Ticks.ToString();              
             var response = new LoginRes() 
-            { Result = "0", 
+            { 
+                Result = 1, 
                 AuthToken = "fake",
-                LobbyServerIP = APIServer.ServerOpt.LobbyServerIP,
-                LobbyServerPort = APIServer.ServerOpt.LobbyServerPort,
+                GameServerIP = LoginServer.ServerOpt.GameServerIP,
+                GameServerPort = (UInt16)LoginServer.ServerOpt.GameServerPort,
             };
 
+            var authToken = CreateAuthToken();
+
+            var result = await DBRedis.SetValue(request.UserID, authToken);
+
+            response.AuthToken = authToken;
             return response;                        
         }
 
@@ -31,7 +36,7 @@ namespace TetrisApiServer.Controllers
             string token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
             return token;
         }
-                
+
     }
 
     public class LoginReq
@@ -42,10 +47,10 @@ namespace TetrisApiServer.Controllers
 
     public class LoginRes
     {
-        public string Result { get; set; }
+        public int Result { get; set; }
         public string AuthToken { get; set; }
 
-        public string LobbyServerIP { get; set; }
-        public UInt16 LobbyServerPort { get; set; }
+        public string GameServerIP { get; set; }
+        public UInt16 GameServerPort { get; set; }
     }
 }

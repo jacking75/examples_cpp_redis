@@ -6,6 +6,25 @@ using System.Threading.Tasks;
 
 namespace csharp_test_client
 {
+    #region LoginServer 
+    public class LoginReqJson
+    {
+        public string UserID { get; set; }
+        public string UserPW { get; set; }
+    }
+
+    public class LoginResJson
+    {
+        public int Result { get; set; }
+        public string AuthToken { get; set; }
+
+        public string GameServerIP { get; set; }
+        public UInt16 GameServerPort { get; set; }
+    }
+    #endregion
+
+
+
     struct PacketData
     {
         public Int16 DataSize;
