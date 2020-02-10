@@ -7,12 +7,10 @@
 
 int main()
 {
-	//int64_t ret = 0;
-	//uint64_t ret2 = 0;
-
 	RedisCpp::CRedisConn con;
 	
 	std::string value;
+	uint32_t retval = 0;
 
 	if (!con.connect("127.0.0.1", 6379))
 	{
@@ -25,14 +23,15 @@ int main()
 	}
 
 
-	std::string value;
-	if (con.get("test01", value))
+	if (con.get("test02", value))
 	{
-		printf("test01 - %s", value);
+		printf("test02 - %s", value.c_str());
+		con.del("test02", retval);
 	}
 	else
 	{
-		std::cout << "test01 - ???" << std::endl;
+		std::cout << "test02 - ???" << std::endl;		
+		con.set("test02", "llll", retval);
 	}
 
 	return 0;

@@ -38,17 +38,17 @@ typedef std::map<std::string , std::string> ValueMap;
 
 
 
-///< 这个是插入时候是插入在指定元素之前，或者指定元素之后
+///< 지정된 요소 앞이나 지정된 요소 뒤에 삽입
 /*typedef */enum INSERT_POS
 {
-	BEFORE,			///< 插入到指定元素之前。
+	BEFORE,			///< 지정된 요소 앞에 삽입
 	AFTER
 } E_INSERT_POS;
 
 /**
- *@brief 此类基于 hiredis 用于保持与 redis-server 的链接。
+ *@brief 이 클래스는 hiredis를 기반으로 하며 redis-server에 대한 링크를 유지하는데 사용된다.
  * 
- * 例子代码:
+ * 샘플 코드:
  *int main( )
  {
  RedisCpp::RedisConn con;
@@ -87,10 +87,10 @@ public:
 	}
 
 	/**
-	 *@brief 初始化链接信息
+	 *@brief 연결 정보 초기화
 	 *
-	 *用于初始化链接的详细信息。在　connect() 之前使用。也可以直接调用
-	 *bool connect( const std::string &host ,const uint16_t port, const std::string& password , const uint32_t timeout );来初始化。
+	 *연결을 초기화 하는데 사용 되는 세부 사항. connect() 전에 사용한다. 직접 호출 가능
+	 *bool connect( const std::string &host ,const uint16_t port, const std::string& password , const uint32_t timeout );
 	 */
 	void init( const std::string &host = "127.0.0.1" , const uint16_t port = 6379 ,
 	                const std::string& password = "" , const uint32_t timeout = 0 )
@@ -103,11 +103,11 @@ public:
 
 
 	/**
-	 *@brief 链接　redis 数据库
+	 *@brief 접속　redis 데이터베이스
 	 *
-	 * init() 之后调用此方法来链接数据库
+	 * 이 메소드는 데이터베이스를 연결하기 위해 init() 후에 호출한다.
 	 *
-	 *@return 成功返回　true,失败返回　false
+	 *@return 성공　true, 실패　false
 	 */
 	bool connect()
 	{
@@ -143,13 +143,13 @@ public:
 		}
 		else
 		{
-			return ( auth( _password ) );   //< 授权失败也将返回false
+			return ( auth( _password ) );   //< 승인 실패도 false 반환
 		}
 	*/
 	}
 
 	/**
-	 *@brief 断开与　redis 内存数据库链接
+	 *@brief 연결 끊기. Redis 인 메모리 데이터베이스
 	 */
 	void disConnect( )
 	{
@@ -162,10 +162,10 @@ public:
 	}
 
 	/**
-	 *@brief 链接　redis 数据库之后，需要认证。
+	 *@brief redis 데이터 베이스를 연결한 후 인증
 	 *
-	 *@param [in] 登录的密码。
-	 *@return 成功返回　true, 失败返回　false.
+	 *@param [in] 로그인 비밀 번호
+	 *@return 성공　true, 실패　false.
 	 */
 	bool auth( const std::string& password )
 	{
@@ -197,15 +197,15 @@ public:
 	}
 
 	/**
-	 *@brief 初始化链接信息并且链接。
+	 *@brief 접속
 	 *
-	 * 初始化链接需要的信息。如果需要　password 非空那么就自动　auth 认证。
+	 * 초기화하는데 필요한 정보. 비밀번호가 비어 있지 않으면 인증 자동으로 수행된다.
 	 *
-	 *@param [in]  host .  redis-server 的 ip。
-	 *@param [in] port .redis-server 的 port 。
-	 *@param [in] password . redis-server 认证密码，此参数可以不填，不填旧不会发起认证。
-	 *@param [in] timeout . 链接的超时时间。
-	 *@return true 成功，　false 失败。
+	 *@param [in]  host .  redis-server의 ip。
+	 *@param [in] port .redis-server의 port 。
+	 *@param [in] password . redis-server의 비밀번호. 이 매개 변수는 비워 둘 수 있으며, 입력하지 않으면 인증을 시작하지 않는다.
+	 *@param [in] timeout .연결 시간 초과
+	 *@return 성공 true，　실패 false
 	 */
 	bool connect( const std::string &host , const uint16_t port , const std::string& password =
 	                "" , const uint32_t timeout = 0 )
@@ -217,9 +217,9 @@ public:
 	}
 
 	/**
-	 * @brief 检查与服务器网络
+	 * @brief 연결 상태 조사
 	 *
-	 * @return 网络链接正常返回　true, 不通返回　false.
+	 * @return 연결 되어 있다면 true를 반환하고, 그렇지 않으면 false를 반환.
 	 */
 	bool ping( )
 	{
@@ -250,9 +250,9 @@ public:
 	}
 
 	/**
-	 *@brief 重新链接　redis 服务器。
+	 *@brief redis에 다시 연결
 	 *
-	 *@return 重连成功　true, 重连失败　false.
+	 *@return 재 연결 성공　true, 재 연결 실패　false.
 	 */
 	bool reconnect( )
 	{
@@ -260,9 +260,9 @@ public:
 	}
 
 	/**
-	 * @brief 检查是否链接过　redis 服务器。
+	 * @brief redis와 연결 여부
 	 *
-	 * @return 已经链接　true,没有链接过　false.
+	 * @return 연결 되어 있다면　true, 아니면　false.
 	 */
 	inline bool isConneced( )
 	{
@@ -270,9 +270,9 @@ public:
 	}
 
 	/**
-	 * @brief 获取错误的原因
+	 * @brief 오류 원인
 	 *
-	 * ＠return 返回发生错误的原因.
+	 * ＠return 에러 원인 반환
 	 */
 	const std::string getErrorStr() const
 	{
@@ -280,11 +280,11 @@ public:
 	}
 
 	/**
-	 * @brief 直接发送指令参数给　redis 服务器。
+	 * @brief 명령 매개 변수를 redis 서버로 직접 보낸다.
 	 *
-	 * ＠param [in] format 格式化子复制。
-	 * ＠param [in] ... 指令及数据字符串。
-	 * @return NULL ,redis 执行失败，或者断开连接。成功返回　redisReply 指针。
+	 * ＠param [in] format 
+	 * ＠param [in] ... 명령 및 데이터 문자열
+	 * @return NULL, redis 실행 실패 및 연결이 끊아진 경우. 성공이라면　redisReply 반환
 	 */
 	redisReply* redisCmd( const char *format , ... )
 	{
@@ -295,11 +295,11 @@ public:
 		return reply;
 	}
 
-	///////////////////////////////// list 的方法 /////////////////////////////////////
+	///////////////////////////////// list 사용법 /////////////////////////////////////
 	/**
-	 * @brief 从list左边插入一个元素
-	 * @param [in] retval 插入成功后list长度
-	 * @return false插入失败，true插入成功
+	 * @brief list 왼쪽에 삽입
+	 * @param [in] retval 삽입 성공 후 list 길이
+	 * @return 실패 false，성공 true
 	 */
 	bool lpush( const std::string& key , const std::string& value , uint64_t& retval )
 	{
@@ -333,9 +333,9 @@ public:
 	}
 
 	/**
-	 * @brief 从list左边弹出一个元素
-	 * @param [in] value 弹出的元素值
-	 * @return false弹出失败，true弹出成功
+	 * @brief list 왼쪽에서 추출
+	 * @param [in] value 빼낸 값
+	 * @return 실패 false，성공 true
 	 */
 	bool lpop( const std::string& key , std::string& value )
 	{
@@ -354,7 +354,7 @@ public:
 		}
 		else
 		{
-			// 失败
+			// 실패
 			if (NULL == reply->str)
 			{
 				_errStr = _errDes[ERR_NO_KEY];
@@ -377,8 +377,8 @@ public:
 	}
 
 	/**
-	 * @brief 获取list指定区间内的元素
-	 * @param [in] start 区间开始下标，stop 区间结束下标, valueList区间list
+	 * @brief 지정된 범위의 list에 있는 요소를 가져온다.
+	 * @param [in] start 간격 시작 색인，stop 간격 끝 색인, valueList 간격 list
 	 */
 	bool lrange( const std::string &key , uint32_t start , int32_t end, ValueList& valueList )
 	{
@@ -397,7 +397,7 @@ public:
 		}
 		else
 		{
-			if (REDIS_REPLY_ARRAY == reply->type && 0 == reply->elements) //<  key是list类型但 start > end
+			if (REDIS_REPLY_ARRAY == reply->type && 0 == reply->elements) //<  key는 list 열거 타입 start > end
 			{
 				_errStr = std::string(_errDes[ERR_INDEX]) + " or "
 					+ _errDes[ERR_NO_KEY];
@@ -420,9 +420,9 @@ public:
 	}
 
 	/**
-	 * @brief 从list右边插入一个元素
-	 * @param [in] retval 插入成功后list长度
-	 * @return false插入失败，true插入成功
+	 * @brief list 오른쪽에 삽입
+	 * @param [in] retval 삽입 성공 후의 list 요소 수
+	 * @return 실패 false，성공 true
 	 */
 	bool rpush(const std::string& key, const std::string& value, uint64_t& retval)
 	{
@@ -456,9 +456,9 @@ public:
 	}
 
 	/**
-	 * @brief 从list右边弹出一个元素
-	 * @param [in] value 弹出的元素值
-	 * @return false弹出失败，true弹出成功
+	 * @brief list 오른쪽에서 빼내기
+	 * @param [in] value 빼낸 값
+	 * @return 실패 false，성공 true
 	 */
 	bool rpop( const std::string& key , std::string& value )
 	{
@@ -477,7 +477,7 @@ public:
 		}
 		else
 		{
-			// 失败
+			// 실패
 			if (NULL == reply->str)
 			{
 				_errStr = _errDes[ERR_NO_KEY];
@@ -527,7 +527,7 @@ public:
 		redisReply* reply = redisCmd("LINSERT %s %s %s %s", key.c_str(), pos.c_str(),
 			pivot.c_str(), value.c_str());
 
-		if (_getError(reply))	//< 不是list 类型
+		if (_getError(reply))	//< list 유형이 아님
 		{
 			ret = false;
 		}
@@ -587,7 +587,7 @@ public:
 		}
 		else
 		{
-			// 失败
+			// 실패
 			if (REDIS_REPLY_NIL == reply->type)
 			{
 				_errStr = std::string(_errDes[ERR_NO_KEY]) + " or " +
@@ -652,6 +652,10 @@ public:
 	}
 
 
+
+
+	//////////////////////////////  string 사용 방법 //////////////////////////////////////
+	
 	bool get(const std::string& key, std::string& value)
 	{
 		if (!_connected || !_redCtx)
@@ -720,16 +724,45 @@ public:
 		return ret;
 	}
 
+	bool del(const std::string& key, uint32_t& retval)
+	{
+		if (!_connected || !_redCtx)
+		{
+			_errStr = _errDes[ERR_NO_CONNECT];
+			return false;
+		}
 
-	//////////////////////////////   hash 的方法 //////////////////////////////////////
+		bool ret = false;
+		redisReply* reply = redisCmd("DEL %s", key.c_str());
+
+		if (_getError(reply))
+		{
+			ret = false;
+		}
+		else
+		{
+			retval = (uint32_t)reply->integer;
+			ret = true;
+		}
+
+		if (NULL != reply)
+		{
+			freeReplyObject(reply);
+		}
+
+		return ret;
+	}
+
+
+	//////////////////////////////   hash 사용 방법 //////////////////////////////////////
 
 	/**
-	 * @brief从哈希表中取出以key和field所对应的value值
-	 * @param [in] key 是键名，相当于表名
-	 * @param [in] filed 是字段名
-	 * @param [out] value 是获取的值
-	 * @return true 成功获取，false获取失败
-	 * @warning 获取失败 value为""(string初始化默认值)
+	 * @brief 해시 테이블에서 키와 필드에 해당하는 값을 가져온다.
+	 * @param [in] key는 테이블 이름과 같은 키 이름이다
+	 * @param [in] filed 필드 이름
+	 * @param [out] value 얻은 값
+	 * @return 성공 true，실패 false
+	 * @warning 실패 값은 value""(string 초기화 값)
 	 */
 	bool hget(const std::string& key, const std::string& filed, std::string& value)
 	{
@@ -774,13 +807,13 @@ public:
 	
 
 	/**
-	 * @brief设置哈希表中以key和field所对应的value值
-	 * @param [in] key 是键名，相当于表名
-	 * @param [in] filed 是字段名
-	 * @param [in] value 是以上两参数对应的值
-	 * @param [out] retval 0:field已存在且覆盖了value ； 1： field不存在，新建field且成功设置了value
-	 * @return true 成功获取，false获取失败
-	 * @warning 设置失败 retval为0，成功为1
+	 * @brief 해시 테이블에서 키와 필드의 값을 설정한다
+	 * @param [in] key 테이블 이름과 같은 키 이름이다
+	 * @param [in] filed 필드 이름
+	 * @param [in] value 위의 두 매개 변수에 해당하는 값
+	 * @param [out] retval 0:field가 존재하고 값을 덮어쓴다； 1： field가 존재하지 않고 새 필드가 생성되고 값이 설정 된다.
+	 * @return 성공 true，실패 false
+	 * @warning 실패 retval은 0，성공이라면 1
 	 */
 	bool hset( const std::string& key, const std::string& filed ,const std::string& value, uint32_t& retval )
 	{
@@ -812,12 +845,12 @@ public:
 	}
 
 	/**
-	 * @brief删除哈希表中key所对应的field这一项内容
-	 * @param [in] key 是键名，相当于表名
-	 * @param [in] filed 是字段名
-	 * @param [out] retval：删除的field个数
-	 * @return true 成功获取，false获取失败
-	 *@warning 删除失败 retval为0，成功为1
+	 * @brief 해시 테이블의 키에 해당하는 필드를 삭제한다.
+	 * @param [in] key 테이블 이름과 같은 키 이름
+	 * @param [in] filed 필드 이름
+	 * @param [out] retval：삭제된 필드 수
+	 * @return 성공 true，실패 false
+	 *@warning 실패는 retval 0，성공이라면 1
 	 */
 	bool hdel(const std::string& key, const std::string& filed, uint32_t& retval)
 	{
@@ -860,11 +893,11 @@ public:
 	}
 
 	/**
-	 * @brief取得哈希表中key所对应的所有内容
-	 * @param [in] key 是键名，相当于表名
-	 * @param [out] valueMap 获取的值（map<string,string>类型）
-	 * @return true 成功获取，false获取失败
-	 * @warning 获取失败 valueMap为空
+	 * @brief 해시 테이블의 키에 해당하는 모든 내용을 가져온다
+	 * @param [in] key 테이블 이름과 같은 키 이름이다.
+	 * @param [out] valueMap 값（map<string,string> 유형）
+	 * @return 성공 true，실패 false
+	 * @warning 실패이면 valueMap은 비어 있다
 	 */
 	bool hgetall(const std::string& key, ValueMap& valueMap)
 	{
@@ -906,11 +939,11 @@ public:
 
 protected:
 	/**
-	 *@brief  从 reply->type 为REDIS_REPLY_ARRY 类型的元素获取数据填充到　valueList 列表.
+	 *@brief REDIS_REPLY_ARRY 유형의 reply->type 요소에서 데이터를 가져 와서 valueList 목록에 채운다.
 	 *
 	 *@param [in] reply  . the data return from redis-server.
-	 *@param [out] valueList .从　reply 提取的多条数据.
-	 *@return 成功返回 true, 失败返回　false.
+	 *@param [out] valueList. reply에서 추출된 여러 데이터
+	 *@return 성공 true, 실패　false.
 	 */
 	bool _getArryToList( redisReply* reply , ValueList& valueList )
 	{
@@ -936,13 +969,13 @@ protected:
 	}
 
 	/**
-	 *@brief  从 reply->type 为REDIS_REPLY_ARRY 类型的元素获取数据填充到valueMap 列表.
+	 *@brief REDIS_REPLY_ARRY 유형의 reply->type 요소에서 데이터를 가져 와서 valueMap 목록을 채운다.
 	 *
-	 *hgetall 返回数据奇数为字段名,偶数为字段数据。以　字段名=字段数据的方式存在　valueMap 里。
+	 *hgetall은 홀수를 필드 이름으로, 짝수를 필드 데이터로 반환한다. 필드 이름 = 필드 데이터로 valueMap에 저장된다.
 	 *
 	 *@param [in] reply  . the data return from redis-server.
-	 *@param [out] valueMap .从 reply 提取的much of pair 数据存储到　valueMap.
-	 *@return 成功返回 true, 失败返回　false.
+	 *@param [out] valueMap. reply에서 추출된 많은 페어 데이터는 valueMap에 저장된다.
+	 *@return 성공 true, 실패　false.
 	 */
 	bool _getArryToMap( redisReply* reply , ValueMap& valueMap )
 	{
