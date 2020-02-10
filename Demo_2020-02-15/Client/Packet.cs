@@ -9,17 +9,17 @@ namespace csharp_test_client
     #region LoginServer 
     public class LoginReqJson
     {
-        public string UserID { get; set; }
-        public string UserPW { get; set; }
+        public string userID { get; set; }
+        public string userPW { get; set; }
     }
 
     public class LoginResJson
     {
-        public int Result { get; set; }
-        public string AuthToken { get; set; }
+        public int result { get; set; }
+        public string authToken { get; set; }
 
-        public string GameServerIP { get; set; }
-        public UInt16 GameServerPort { get; set; }
+        public string gameServerIP { get; set; }
+        public UInt16 gameServerPort { get; set; }
     }
     #endregion
 

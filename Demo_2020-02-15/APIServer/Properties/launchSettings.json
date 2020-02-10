@@ -9,15 +9,16 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "IISExpress",
+      "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/Account/Create", //원래값은 api/values
+      "launchUrl": "api/Account/Create",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "WebApplication1": {
       "commandName": "Project",
+      "commandLineArgs": "--redisName localhost --redisAddress 127.0.0.1:6379 --gameServerIP 127.0.0.1 --gameServerPort 32452",
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {

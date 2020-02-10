@@ -17,17 +17,17 @@ namespace APIServer.Controllers
         {
             var response = new LoginRes() 
             { 
-                Result = 1, 
-                AuthToken = "fake",
-                GameServerIP = LoginServer.ServerOpt.GameServerIP,
-                GameServerPort = (UInt16)LoginServer.ServerOpt.GameServerPort,
+                result = 1, 
+                authToken = "fake",
+                gameServerIP = LoginServer.ServerOpt.GameServerIP,
+                gameServerPort = (UInt16)LoginServer.ServerOpt.GameServerPort,
             };
 
             var authToken = CreateAuthToken();
 
-            var result = await DBRedis.SetValue(request.UserID, authToken);
-
-            response.AuthToken = authToken;
+            var result = await DBRedis.SetValue(request.userID, authToken);
+            
+            response.authToken = authToken;
             return response;                        
         }
 
@@ -41,16 +41,16 @@ namespace APIServer.Controllers
 
     public class LoginReq
     {
-        public string UserID { get; set; }
-        public string UserPW { get; set; }
+        public string userID { get; set; }
+        public string userPW { get; set; }
     }
 
     public class LoginRes
     {
-        public int Result { get; set; }
-        public string AuthToken { get; set; }
+        public int result { get; set; }
+        public string authToken { get; set; }
 
-        public string GameServerIP { get; set; }
-        public UInt16 GameServerPort { get; set; }
+        public string gameServerIP { get; set; }
+        public UInt16 gameServerPort { get; set; }
     }
 }
