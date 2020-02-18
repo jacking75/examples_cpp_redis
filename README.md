@@ -1,6 +1,12 @@
 # examples_cpp_redis
 C++ Redis 사용 방법 정리
+   
+## 강연
+- [C++를 이용한 Redis 프로그래밍 ](http://bit.ly/39AlMT7  )
+    - 2020.02.15 C++ Koread 미니 세미나
+	- RedisCpp-hiredis를 사용한 게임 서버 예제 코드는 `Demo_2020-02-15` 디렉토리에 있다
     
+  
 ## 공식 redis C++ 클라이언트 라이브러리 정리
 - redis 공식 사이트에 가면 각 언어 별 라이브러리가 있다.
     - C++ http://redis.io/clients#c–
@@ -21,6 +27,7 @@ C++ Redis 사용 방법 정리
     
 
 ## 크로스 플랫폼 지원
+  
 ### RedisCpp-hiredis
 - RedisCpp-hiredis 디렉토리
 - Linux, Windows 지원
